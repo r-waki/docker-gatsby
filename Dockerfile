@@ -6,11 +6,12 @@ RUN apk update && \
     yarn global add gatsby-cli && \
     gatsby options set package-manager yarn && \
     cat '/usr/share/zoneinfo/Asia/Tokyo' > /etc/localtime && \
-    npm install -g commitizen
+    npm install -g commitizen commit-conventional-changelog
 
 ARG USERNAME=node
 USER $USERNAME
 WORKDIR /home/$USERNAME/
 EXPOSE 8000 9000
 
+# Install chezmoi and download my dotfiles 
 RUN sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b $HOME/.local/bin init --apply r-waki
